@@ -55,3 +55,12 @@ header.top{background:#eee;color:#111;border-bottom:1px solid #ddd}
 @keyframes announcement-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(max-width:760px){.cover-controls{left:50%;bottom:12px;background:none;padding:0;gap:0}.announcement{padding:7px 0}.announcement-group>span{padding:0 24px}.announcement-group>span>span{margin:0 14px}}
 @media(prefers-reduced-motion:reduce){.announcement-track{animation:none}.cover-dots button::after{transition:none}}
+/* Texto sobre la fotografía, sin panel ni velo claro. */
+.cover-photo{width:100%;object-position:50% 65%}
+.cover-slide::before,.cover-sprays::before,.cover-brand::before{background:linear-gradient(90deg,rgba(0,0,0,.44),rgba(0,0,0,.16) 48%,transparent 78%)}
+.cover-copy{color:#fff;text-shadow:0 1px 5px #0004}
+.cover-note{color:#fff}
+.cover-cta{text-shadow:none;background:#fff;color:#111}
+.cover-sprays .cover-photo{object-position:50% 52%}
+.cover-brand .cover-photo{object-position:50% 69%}
+@media(max-width:760px){.cover-photo{object-position:50% 70%}.cover-slide::before,.cover-sprays::before,.cover-brand::before{background:linear-gradient(180deg,rgba(0,0,0,.46),rgba(0,0,0,.23) 35%,transparent 72%)}.cover-brand .cover-photo{object-position:50% 80%}.cover-sprays .cover-photo{object-position:50% 64%}}
