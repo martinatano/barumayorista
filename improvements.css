@@ -37,3 +37,21 @@ header.top{background:#eee;color:#111;border-bottom:1px solid #ddd}
 .cover-sprays{background:#e7e4df}.cover-sprays::before{background:linear-gradient(90deg,#e7e4df 0%,#e7e4df 30%,rgba(231,228,223,.94) 40%,rgba(231,228,223,0) 68%)}.cover-sprays .cover-photo{object-position:50% 51%}
 .cover-brand .cover-photo{object-position:50% 71%}.cover-controls{position:absolute;bottom:17px;left:max(48px,calc((100vw - 1280px)/2));display:flex;align-items:center;gap:16px;z-index:2}.cover-controls>button{width:40px;height:40px;border:1px solid #1114;background:#ffffff40;color:#111;font-size:20px}.cover-dots{display:flex;gap:2px}.cover-dots button{border:0;background:transparent;min-width:30px;height:40px;position:relative}.cover-dots button::after{content:"";display:block;width:5px;height:5px;background:#1115;border-radius:50%;margin:auto}.cover-dots button[aria-current]::after{background:#111;width:7px;height:7px}#coverCounter{font-size:10px;letter-spacing:.12em}
 @media(max-width:760px){.cover-slide{height:640px;min-height:0}.cover-photo{width:100%;object-position:50% 70%}.cover-slide::before{background:linear-gradient(180deg,rgba(232,231,228,.97) 0%,rgba(232,231,228,.9) 22%,rgba(232,231,228,.15) 56%,transparent 78%)}.cover-copy{width:100%;height:auto;padding:26px 24px 0;justify-content:flex-start}.cover-kicker{font-size:9px;margin-bottom:12px}.cover-copy h1,.cover-copy h2{font-size:45px;line-height:.98}.cover-description{font-size:12px;line-height:1.6;margin-top:14px;max-width:31ch}.cover-description br{display:none}.cover-cta{margin-top:16px;padding:10px 18px;font-size:11px;min-height:42px}.cover-note{font-size:9px;margin-top:10px;max-width:32ch}.cover-controls{bottom:12px;left:18px;gap:8px;background:#eeeeeeda;padding:0 5px}.cover-controls>button{border:0;background:transparent}.cover-brand .cover-photo{object-position:50% 80%}.cover-sprays .cover-photo{object-position:50% 64%}.cover-sprays::before{background:linear-gradient(180deg,rgba(237,234,228,.98),rgba(237,234,228,.92) 30%,rgba(237,234,228,0) 66%)}.cover-brand::before{background:linear-gradient(180deg,rgba(224,224,224,.98),rgba(224,224,224,.87) 28%,rgba(224,224,224,0) 64%)}}
+
+/* Navegación discreta sobre las portadas. */
+.cover-controls{left:50%;bottom:20px;transform:translateX(-50%);gap:0;padding:0;background:none}
+.cover-controls>button,#coverCounter{display:none}
+.cover-dots{gap:3px;padding:0;background:none}
+.cover-dots button{min-width:36px;width:36px;height:36px;padding:0}
+.cover-dots button::after{width:5px;height:5px;background:#fff9;border:1px solid #0004;box-shadow:0 0 2px #0003;transition:width .2s,background .2s;border-radius:8px}
+.cover-dots button[aria-current]::after{width:19px;height:5px;background:#fff;border-color:#0004}
+.cover-dots button:focus-visible{outline:1px solid #fff;outline-offset:0;border-radius:50%}
+.announcement{overflow:hidden;padding:8px 0;white-space:nowrap}
+.announcement-track{display:flex;width:max-content;animation:announcement-scroll 38s linear infinite}
+.announcement-group{display:flex;flex-shrink:0;justify-content:space-around;min-width:100vw}
+.announcement-group>span{display:block;flex-shrink:0;margin:0;padding:0 38px}
+.announcement-group>span>span{margin:0 22px}
+.announcement:hover .announcement-track{animation-play-state:paused}
+@keyframes announcement-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:760px){.cover-controls{left:50%;bottom:12px;background:none;padding:0;gap:0}.announcement{padding:7px 0}.announcement-group>span{padding:0 24px}.announcement-group>span>span{margin:0 14px}}
+@media(prefers-reduced-motion:reduce){.announcement-track{animation:none}.cover-dots button::after{transition:none}}
