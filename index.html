@@ -300,10 +300,10 @@
 </style>
 <link rel="stylesheet" href="improvements.css">
 
-<header class="top">
+<div class="announcement">VENTA MAYORISTA <span>·</span> Envíos a todo el país <span>·</span> Primera compra desde $180.000</div>
+<header class="top" id="inicio">
   <div class="top-row">
-    <a class="header-link" href="#viewTabs">Catálogo mayorista</a>
-    <div class="brand"><img id="brandLogo" alt="Barú"></div>
+    <a class="brand" href="#inicio" aria-label="Barú, inicio"><img id="brandLogo" alt="Barú"><span>Mayorista</span></a><nav class="store-nav" aria-label="Navegación principal"><a href="#inicio">Inicio</a><a href="#viewTabs">Productos</a><a href="#condiciones">Cómo comprar</a><a href="https://wa.me/5491178185624" target="_blank" rel="noopener">Contacto</a></nav><form class="header-search" id="headerSearch"><input type="search" id="headerQuery" placeholder="¿Qué estás buscando?" aria-label="Buscar en el catálogo"><button aria-label="Buscar" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg></button></form>
     <button class="cart-btn" id="cartBtn" aria-label="Ver carrito">
       <svg viewBox="0 0 24 24"><path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.8h8.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="20" r="1.4" fill="currentColor" stroke="none"/></svg>
       <span class="cart-count" id="cartCount" hidden>0</span>
@@ -313,29 +313,16 @@
 
 <section class="hero">
   <div class="hero-copy">
-    <h1>Catálogo mayorista</h1>
-    <p class="sub">Home sprays, difusores y velas. Elegí las cantidades y los aromas; coordinamos el pedido por WhatsApp.</p><div class="hero-actions"><a class="primary-link" href="#viewTabs">Ver productos</a><a class="help-link" href="https://wa.me/5491178185624?text=Hola%2C%20quiero%20asesoramiento%20para%20mi%20pedido%20mayorista" target="_blank" rel="noopener">Consultar por WhatsApp</a></div>
-    <dl class="hero-facts">
-      <div><dt>Primera compra</dt><dd>mínimo $180.000</dd></div>
-      <div><dt>Reposición</dt><dd>mínimo $150.000</dd></div>
-      <div><dt>Fabricación</dt><dd>hasta 7 días hábiles</dd></div>
-      <div><dt>Envíos</dt><dd>a todo el país</dd></div>
-    </dl>
-    <button class="cond-toggle" id="condToggle" type="button">Ver todas las condiciones</button>
-    <div class="cond-detail" id="condDetail">
-      <ul>
-        <li><b>Pago:</b> por transferencia. Con tarjeta o Mercado Pago, +10% sobre el precio de transferencia.</li>
-        <li><b>Envíos:</b> a todo el país por Correo Argentino, Andreani o motomensajería.</li>
-        <li><b>Fabricación:</b> hasta 7 días hábiles según el pedido. Si tenés urgencia, consultanos.</li>
-        <li><b>Etiquetas de difusores:</b> se pueden personalizar con tu marca (nos mandás tu logo).</li>
-        <li><b>Home spray con etiqueta Barú:</b> no se puede revender por debajo del precio publicado en nuestra web.</li>
-        <li><b>Souvenirs para eventos:</b> packaging y papelería a medida, con descuento por cantidad. Consultanos.</li>
-      </ul>
-    </div>
+    <p class="hero-kicker">HOME SPRAYS · DIFUSORES · VELAS</p>
+    <h1>Aromas para <br>tu local.</h1>
+    <p class="sub">Elegí los productos Barú para tu negocio.<br>También personalizamos las etiquetas de tus difusores con tu marca.</p>
+    <a class="primary-link" href="#viewTabs">Ver catálogo</a>
+    <p class="hero-small">Armá tu pedido online. Lo coordinamos por WhatsApp.</p>
   </div>
-  <figure class="hero-photo"><img id="heroImg" alt="Dos difusores Barú de vidrio sobre una mesa de madera"></figure>
+  <div class="hero-images"><figure class="hero-photo"><img id="heroImg" alt="Difusores Barú de vidrio" fetchpriority="high"></figure><figure class="hero-secondary"><img id="heroSpray" alt="Home Spray Petit Barú" fetchpriority="high"></figure></div>
 </section>
-
+<div class="buying-facts"><div><strong>Primera compra</strong><span>Desde $180.000</span></div><div><strong>Reposición</strong><span>Desde $150.000</span></div><div><strong>Hecho a pedido</strong><span>Hasta 7 días hábiles</span></div><div><strong>Envíos</strong><span>A todo el país</span></div></div>
+<section class="category-section" aria-labelledby="categoriesTitle"><h2 id="categoriesTitle">Nuestros productos</h2><div class="category-gallery" id="categoryGallery"></div></section>
 <div class="view-tabs" id="viewTabs">
   <button class="view-tab active" data-view="catalogo">Catálogo</button>
   <button class="view-tab" data-view="aromas">Guía de aromas</button>
@@ -360,6 +347,17 @@
   <div class="aromas-wrap" id="aromasList"></div>
 </div>
 
+<section class="buying-section" id="condiciones"><div><h2>Cómo comprar</h2><p>Elegí productos, cantidades y aromas. Cuando llegues al mínimo, abrí tu pedido y continuá por WhatsApp para coordinar disponibilidad, envío y pago.</p><button class="cond-toggle" id="condToggle" type="button" aria-expanded="false" aria-controls="condDetail">Ver todas las condiciones</button>    <div class="cond-detail" id="condDetail">
+      <ul>
+        <li><b>Pago:</b> por transferencia. Con tarjeta o Mercado Pago, +10% sobre el precio de transferencia.</li>
+        <li><b>Envíos:</b> a todo el país por Correo Argentino, Andreani o motomensajería.</li>
+        <li><b>Fabricación:</b> hasta 7 días hábiles según el pedido. Si tenés urgencia, consultanos.</li>
+        <li><b>Etiquetas de difusores:</b> se pueden personalizar con tu marca (nos mandás tu logo).</li>
+        <li><b>Home spray con etiqueta Barú:</b> no se puede revender por debajo del precio publicado en nuestra web.</li>
+        <li><b>Souvenirs para eventos:</b> packaging y papelería a medida, con descuento por cantidad. Consultanos.</li>
+      </ul>
+    </div>
+</div><div class="buying-contact"><h3>¿Necesitás ayuda con tu pedido?</h3><p>Escribinos y lo armamos con vos.</p><a href="https://wa.me/5491178185624" target="_blank" rel="noopener">Consultar por WhatsApp</a></div></section>
 <footer class="site">
   BARÚ · Ituzaingó, Buenos Aires · <a href="https://instagram.com/barubsas" target="_blank" rel="noopener">@barubsas</a>
 </footer>
@@ -449,6 +447,7 @@ const WHATSAPP = "5491178185624";
 const fmt = n => n==null ? "" : "$" + n.toLocaleString("es-AR");
 const img = sku => (window.BARU_IMAGES && window.BARU_IMAGES[sku]) || "";
 document.getElementById("heroImg").src = img("HERO");
+document.getElementById("heroSpray").src = img("HS-125");
 const setHdr = () => document.documentElement.style.setProperty("--hdr", document.querySelector("header.top").offsetHeight + "px");
 setHdr();
 window.addEventListener("resize", setHdr);
@@ -505,6 +504,7 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
 document.getElementById("condToggle").addEventListener("click", () => {
   const d = document.getElementById("condDetail");
   const open = d.classList.toggle("open");
+  document.getElementById("condToggle").setAttribute("aria-expanded", String(open));
   document.getElementById("condToggle").textContent = open ? "Ocultar condiciones" : "Ver todas las condiciones";
 });
 
@@ -872,6 +872,26 @@ function renderAromas(){
 document.getElementById("barOpen").addEventListener("click", openDrawer);
 document.getElementById("purchaseType").addEventListener("change", e => { state.tipo = e.target.value; persist(); renderCartBadge(); });
 document.querySelectorAll('a[href="#viewTabs"]').forEach(a => a.addEventListener("click", () => showView("catalogo")));
+const categoryPhotos = {"home-spray":"HS-125", "difusor-hogar":"DIF-BRUMA-125", "difusor-auto":"DIF-AUTO-30", "accesorios":"VAR-22-X5", "velas":"VELA-CUARZO-ROSA"};
+LINEAS.filter(l => l.id).forEach(l => {
+ const button = document.createElement("button");
+ button.className = "category-tile";
+ button.innerHTML = `<img src="${img(categoryPhotos[l.id])}" alt="" loading="lazy"><span>${l.label}</span>`;
+ button.addEventListener("click", () => {
+  showView("catalogo"); searchTerm = ""; document.getElementById("searchInput").value = "";
+  lineaChipsEl.querySelector(`[data-linea="${l.id}"]`).click();
+  document.getElementById("viewTabs").scrollIntoView({behavior:"smooth"});
+ });
+ document.getElementById("categoryGallery").appendChild(button);
+});
+document.getElementById("headerSearch").addEventListener("submit", e => {
+ e.preventDefault();
+ showView("catalogo"); document.getElementById("resetFilters").click();
+ const input = document.getElementById("searchInput");
+ input.value = document.getElementById("headerQuery").value;
+ input.dispatchEvent(new Event("input"));
+ document.getElementById("viewTabs").scrollIntoView({behavior:"smooth"});
+});
 /* ---------------- init ---------------- */
 renderGrid();
 renderCartBadge();
