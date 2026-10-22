@@ -301,9 +301,9 @@
 <link rel="stylesheet" href="improvements.css">
 
 <div class="announcement">VENTA MAYORISTA <span>·</span> Envíos a todo el país <span>·</span> Primera compra desde $180.000</div>
-<header class="top" id="inicio">
+<header class="top">
   <div class="top-row">
-    <a class="brand" href="#inicio" aria-label="Barú, inicio"><img id="brandLogo" alt="Barú"><span>Mayorista</span></a><nav class="store-nav" aria-label="Navegación principal"><a href="#inicio">Inicio</a><a href="#viewTabs">Productos</a><a href="#condiciones">Cómo comprar</a><a href="https://wa.me/5491178185624" target="_blank" rel="noopener">Contacto</a></nav><form class="header-search" id="headerSearch"><input type="search" id="headerQuery" placeholder="¿Qué estás buscando?" aria-label="Buscar en el catálogo"><button aria-label="Buscar" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg></button></form>
+    <a class="brand" href="#inicio" aria-label="Barú, inicio"><img id="brandLogo" alt="Barú"><span>Mayorista</span></a><nav class="store-nav" aria-label="Navegación principal"><a href="#inicio">Inicio</a><a href="#productos">Productos</a><a href="#condiciones">Cómo comprar</a><a href="https://wa.me/5491178185624" target="_blank" rel="noopener">Contacto</a></nav><form class="header-search" id="headerSearch"><input type="search" id="headerQuery" placeholder="¿Qué estás buscando?" aria-label="Buscar en el catálogo"><button aria-label="Buscar" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg></button></form>
     <button class="cart-btn" id="cartBtn" aria-label="Ver carrito">
       <svg viewBox="0 0 24 24"><path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.8h8.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="20" r="1.4" fill="currentColor" stroke="none"/></svg>
       <span class="cart-count" id="cartCount" hidden>0</span>
@@ -311,22 +311,24 @@
   </div>
 </header>
 
+<div id="viewInicio">
 <section class="retail-cover" aria-label="Barú mayorista">
-  <a href="#viewTabs" aria-label="Ver catálogo mayorista de Barú">
+  <a href="#productos" aria-label="Ver catálogo mayorista de Barú">
     <picture><source media="(max-width:760px)" srcset="https://acdn-us.mitiendanube.com/stores/002/130/994/themes/rio/2-slide-1788965442327-2659687205-c20ba0842315e6b72cbb3c87fb2895ac1788965444-1920-1920.webp?8215736643541017156"><img src="https://acdn-us.mitiendanube.com/stores/002/130/994/themes/rio/2-slide-1790545849710-3615095559-e68ca42dee8c35d3f8ad5278c590336f1790545851-1920-1920.webp?8215736643541017156" alt="Difusores Barú. Ver catálogo mayorista." fetchpriority="high" width="1280" height="469"></picture>
   </a>
 </section>
-<section class="wholesale-intro"><h1>Barú mayorista</h1><p>Home sprays, difusores y velas para tu negocio. Armá tu pedido y coordiná con nosotros por WhatsApp.</p><a href="#viewTabs">Ver productos</a></section>
+<section class="wholesale-intro"><h1>Barú mayorista</h1><p>Home sprays, difusores y velas para tu negocio. Armá tu pedido y coordiná con nosotros por WhatsApp.</p><a href="#productos">Ver productos</a></section>
 <div class="buying-facts"><div><strong>Primera compra</strong><span>Desde $180.000</span></div><div><strong>Reposición</strong><span>Desde $150.000</span></div><div><strong>Hecho a pedido</strong><span>Hasta 7 días hábiles</span></div><div><strong>Envíos</strong><span>A todo el país</span></div></div>
-<section class="category-section" aria-labelledby="categoriesTitle"><h2 id="categoriesTitle">Nuestros productos</h2><div class="category-gallery" id="categoryGallery"></div></section>
+</div>
+<div id="viewProductos" hidden>
 <div class="view-tabs" id="viewTabs">
   <button class="view-tab active" data-view="catalogo">Catálogo</button>
   <button class="view-tab" data-view="aromas">Guía de aromas</button>
 </div>
 
-<div id="viewCatalogo"><div class="catalog-intro"><div><h2>Productos</h2><p>Precio mayorista por unidad · Pago por transferencia</p></div><div class="purchase-type"><label for="purchaseType">¿Qué pedido vas a hacer?</label><select id="purchaseType"><option value="primera">Primera compra · mínimo $180.000</option><option value="reposicion">Reposición · mínimo $150.000</option></select></div></div>
+<div id="viewCatalogo"><div class="catalog-intro"><div><h1>Productos</h1><p>Precio mayorista por unidad · Pago por transferencia</p></div><div class="purchase-type"><label for="purchaseType">¿Qué pedido vas a hacer?</label><select id="purchaseType"><option value="primera">Primera compra · mínimo $180.000</option><option value="reposicion">Reposición · mínimo $150.000</option></select></div></div>
   <div class="filters">
-    <nav class="chip-row" id="lineaChips" aria-label="Categorías de productos"></nav>
+    <label class="category-select-label" for="categorySelect">Categoría<select id="categorySelect" aria-label="Categoría de productos"></select></label>
     <div class="filter-right">
       <input class="search" id="searchInput" type="search" placeholder="Buscar por nombre" aria-label="Buscar producto">
     </div>
@@ -343,7 +345,8 @@
   <div class="aromas-wrap" id="aromasList"></div>
 </div>
 
-<section class="buying-section" id="condiciones"><div><h2>Cómo comprar</h2><p>Elegí productos, cantidades y aromas. Cuando llegues al mínimo, abrí tu pedido y continuá por WhatsApp para coordinar disponibilidad, envío y pago.</p><button class="cond-toggle" id="condToggle" type="button" aria-expanded="false" aria-controls="condDetail">Ver todas las condiciones</button>    <div class="cond-detail" id="condDetail">
+</div>
+<section class="buying-section" id="condiciones" hidden><div><h2>Cómo comprar</h2><p>Elegí productos, cantidades y aromas. Cuando llegues al mínimo, abrí tu pedido y continuá por WhatsApp para coordinar disponibilidad, envío y pago.</p><button class="cond-toggle" id="condToggle" type="button" aria-expanded="false" aria-controls="condDetail">Ver todas las condiciones</button>    <div class="cond-detail" id="condDetail">
       <ul>
         <li><b>Pago:</b> por transferencia. Con tarjeta o Mercado Pago, +10% sobre el precio de transferencia.</li>
         <li><b>Envíos:</b> a todo el país por Correo Argentino, Andreani o motomensajería.</li>
@@ -468,26 +471,17 @@ function persist(){
 }
 
 /* ---------------- filters UI ---------------- */
-const lineaChipsEl = document.getElementById("lineaChips");
+const categorySelect = document.getElementById("categorySelect");
 LINEAS.forEach(l => {
-  const b = document.createElement("button");
-  b.className = "chip" + (l.id === "" ? " active" : "");
-  b.textContent = l.label;
-  b.dataset.linea = l.id;
-  b.setAttribute("aria-pressed", String(l.id === ""));
-  b.addEventListener("click", () => {
-    activeLinea = l.id;
-    [...lineaChipsEl.children].forEach(c => { c.classList.toggle("active", c === b); c.setAttribute("aria-pressed", String(c === b)); });
-    renderGrid();
-  });
-  lineaChipsEl.appendChild(b);
+ const option = document.createElement("option");
+ option.value = l.id; option.textContent = l.id ? l.label : "Todos los productos";
+ categorySelect.appendChild(option);
 });
-
+categorySelect.addEventListener("change", () => { activeLinea = categorySelect.value; renderGrid(); });
 document.getElementById("resetFilters").addEventListener("click", () => {
-  activeLinea = ""; searchTerm = "";
-  document.getElementById("searchInput").value = "";
-  [...lineaChipsEl.children].forEach(c => { const selected = c.dataset.linea === ""; c.classList.toggle("active", selected); c.setAttribute("aria-pressed", String(selected)); });
-  renderGrid();
+ activeLinea = ""; searchTerm = ""; categorySelect.value = "";
+ document.getElementById("searchInput").value = "";
+ renderGrid();
 });
 const normalizeSearch = value => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
@@ -845,12 +839,31 @@ function showToast(text){
 
 /* ---------------- view tabs ---------------- */
 function showView(v){
-  document.querySelectorAll(".view-tab").forEach(t => t.classList.toggle("active", t.dataset.view === v));
+  document.querySelectorAll(".view-tab").forEach(t => {t.classList.toggle("active", t.dataset.view === v); t.setAttribute("aria-pressed", String(t.dataset.view === v));});
   document.getElementById("viewCatalogo").hidden = v !== "catalogo";
   document.getElementById("viewAromas").hidden = v !== "aromas";
 }
+function renderRoute(){
+ const route = location.hash.slice(1);
+ const products = ["productos", "aromas", "viewTabs"].includes(route);
+ const conditions = route === "condiciones";
+ document.getElementById("viewInicio").hidden = products || conditions;
+ document.getElementById("viewProductos").hidden = !products;
+ document.getElementById("condiciones").hidden = !conditions;
+ showView(route === "aromas" ? "aromas" : "catalogo");
+ document.querySelectorAll(".store-nav a").forEach(a => {
+  const active = a.hash === (products ? "#productos" : conditions ? "#condiciones" : "#inicio");
+  if (active) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+ });
+ document.title = `${products ? (route === "aromas" ? "Aromas" : "Productos") : conditions ? "Cómo comprar" : "Inicio"} · Barú Mayorista`;
+ window.scrollTo({top:0,behavior:"instant"});
+}
+function navigateTo(route){
+ if (location.hash === "#" + route) renderRoute(); else location.hash = route;
+}
+window.addEventListener("hashchange", renderRoute);
 document.querySelectorAll(".view-tab").forEach(tab => {
-  tab.addEventListener("click", () => showView(tab.dataset.view));
+ tab.addEventListener("click", () => navigateTo(tab.dataset.view === "aromas" ? "aromas" : "productos"));
 });
 
 function renderAromas(){
@@ -866,31 +879,22 @@ function renderAromas(){
 
 document.getElementById("barOpen").addEventListener("click", openDrawer);
 document.getElementById("purchaseType").addEventListener("change", e => { state.tipo = e.target.value; persist(); renderCartBadge(); });
-document.querySelectorAll('a[href="#viewTabs"]').forEach(a => a.addEventListener("click", () => showView("catalogo")));
-const categoryPhotos = {"home-spray":"HS-125", "difusor-hogar":"DIF-BRUMA-125", "difusor-auto":"DIF-AUTO-30", "accesorios":"VAR-22-X5", "velas":"VELA-CUARZO-ROSA"};
-LINEAS.filter(l => l.id).forEach(l => {
- const button = document.createElement("button");
- button.className = "category-tile";
- button.innerHTML = `<img src="${img(categoryPhotos[l.id])}" alt="" loading="lazy"><span>${l.label}</span>`;
- button.addEventListener("click", () => {
-  showView("catalogo"); searchTerm = ""; document.getElementById("searchInput").value = "";
-  lineaChipsEl.querySelector(`[data-linea="${l.id}"]`).click();
-  document.getElementById("viewTabs").scrollIntoView({behavior:"smooth"});
- });
- document.getElementById("categoryGallery").appendChild(button);
-});
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
+ e.preventDefault(); navigateTo(a.hash.slice(1));
+}));
 document.getElementById("headerSearch").addEventListener("submit", e => {
  e.preventDefault();
- showView("catalogo"); document.getElementById("resetFilters").click();
+ navigateTo("productos"); document.getElementById("resetFilters").click();
  const input = document.getElementById("searchInput");
  input.value = document.getElementById("headerQuery").value;
  input.dispatchEvent(new Event("input"));
- document.getElementById("viewTabs").scrollIntoView({behavior:"smooth"});
+
 });
 /* ---------------- init ---------------- */
 renderGrid();
 renderCartBadge();
 renderAromas();
+renderRoute();
 </script>
 
 </body></html>
