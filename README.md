@@ -20,7 +20,7 @@ Abrir http://localhost:8765 en el navegador.
 
 ## Publicación
 
-Es un sitio estático: publicar `index.html` e `improvements.css` juntos. Las fotos de productos están incorporadas en el HTML. Las portadas se cargan desde el CDN público de TiendaNube; ver `PHOTO-SOURCES.md`. Subir cambios a GitHub no configura por sí solo un alojamiento web.
+Es un sitio estático: publicar `index.html` e `improvements.css` juntos. Las fotos de productos están incorporadas en el HTML. Las portadas usan fotos propias en `assets/portadas/`; publicar también esa carpeta. Ver `PHOTO-SOURCES.md`. Subir cambios a GitHub no configura por sí solo un alojamiento web.
 
 ## Pedidos
 

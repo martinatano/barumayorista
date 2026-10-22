@@ -312,12 +312,21 @@
 </header>
 
 <div id="viewInicio">
-<section class="retail-cover" aria-label="Barú mayorista">
-  <a href="#productos" aria-label="Ver catálogo mayorista de Barú">
-    <picture><source media="(max-width:760px)" srcset="https://acdn-us.mitiendanube.com/stores/002/130/994/themes/rio/2-slide-1788965442327-2659687205-c20ba0842315e6b72cbb3c87fb2895ac1788965444-1920-1920.webp?8215736643541017156"><img src="https://acdn-us.mitiendanube.com/stores/002/130/994/themes/rio/2-slide-1790545849710-3615095559-e68ca42dee8c35d3f8ad5278c590336f1790545851-1920-1920.webp?8215736643541017156" alt="Difusores Barú. Ver catálogo mayorista." fetchpriority="high" width="1280" height="469"></picture>
-  </a>
+<section class="wholesale-covers" aria-label="Portadas de Barú mayorista" aria-roledescription="carrusel">
+ <article class="cover-slide cover-main" id="cover-0" aria-label="1 de 3: Barú para tu negocio" aria-roledescription="diapositiva">
+  <img class="cover-photo" src="assets/portadas/difusores-baru.jpeg" alt="Difusores Barú de vidrio sobre una bandeja de piedra" fetchpriority="high" width="3648" height="5472">
+  <div class="cover-copy"><p class="cover-kicker">BARÚ MAYORISTA</p><h1>Barú, en<br>tu negocio.</h1><p class="cover-description">Home sprays, difusores y velas. <br>Elegí tu selección y armá tu pedido.</p><a class="cover-cta" href="#productos">Ver catálogo mayorista</a><p class="cover-note">Primera compra desde $180.000 · Envíos a todo el país</p></div>
+ </article>
+ <article class="cover-slide cover-sprays" id="cover-1" aria-label="2 de 3: Home sprays" aria-roledescription="diapositiva" hidden>
+  <img class="cover-photo" data-src="assets/portadas/home-sprays-baru.png" alt="Home sprays Barú Cher y Bamboo en una canasta" width="945" height="1665">
+  <div class="cover-copy"><p class="cover-kicker">HOME SPRAYS · VENTA MAYORISTA</p><h2>Un lugar para<br>cada aroma.</h2><p class="cover-description">Sumá home sprays a tu local. <br>Combiná aromas y presentaciones en tu pedido.</p><a class="cover-cta" href="#productos" data-category="home-spray">Ver home sprays</a><p class="cover-note">Elegís acá. Coordinamos por WhatsApp.</p></div>
+ </article>
+ <article class="cover-slide cover-brand" id="cover-2" aria-label="3 de 3: Difusores con tu marca" aria-roledescription="diapositiva" hidden>
+  <img class="cover-photo" data-src="assets/portadas/difusores-marca.jpeg" alt="Difusores Barú Gardenia, Bamboo y Flor Oriental sobre un espejo" width="3356" height="4475">
+  <div class="cover-copy"><p class="cover-kicker">DIFUSORES PERSONALIZADOS</p><h2>Tus aromas.<br>Tu marca.</h2><p class="cover-description">Personalizamos las etiquetas de tus difusores con tu logo. Consultanos al armar tu pedido.</p><a class="cover-cta" href="#productos" data-category="difusor-hogar">Ver difusores</a><p class="cover-note">Las fotos muestran nuestros productos con etiqueta Barú.</p></div>
+ </article>
+ <div class="cover-controls"><button id="coverPrev" aria-label="Portada anterior">←</button><div class="cover-dots" aria-label="Elegir portada"><button aria-label="Ver portada 1: Barú para tu negocio" aria-current="true" data-slide="0"></button><button aria-label="Ver portada 2: Home sprays" data-slide="1"></button><button aria-label="Ver portada 3: Tu marca" data-slide="2"></button></div><span id="coverCounter" aria-live="polite">01 / 03</span><button id="coverNext" aria-label="Portada siguiente">→</button></div>
 </section>
-<section class="wholesale-intro"><h1>Barú mayorista</h1><p>Home sprays, difusores y velas para tu negocio. Armá tu pedido y coordiná con nosotros por WhatsApp.</p><a href="#productos">Ver productos</a></section>
 <div class="buying-facts"><div><strong>Primera compra</strong><span>Desde $180.000</span></div><div><strong>Reposición</strong><span>Desde $150.000</span></div><div><strong>Hecho a pedido</strong><span>Hasta 7 días hábiles</span></div><div><strong>Envíos</strong><span>A todo el país</span></div></div>
 </div>
 <div id="viewProductos" hidden>
@@ -880,7 +889,9 @@ function renderAromas(){
 document.getElementById("barOpen").addEventListener("click", openDrawer);
 document.getElementById("purchaseType").addEventListener("change", e => { state.tipo = e.target.value; persist(); renderCartBadge(); });
 document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
- e.preventDefault(); navigateTo(a.hash.slice(1));
+ e.preventDefault();
+ if (a.dataset.category) {activeLinea = a.dataset.category; categorySelect.value = activeLinea; searchTerm = ""; document.getElementById("searchInput").value = ""; renderGrid();}
+ navigateTo(a.hash.slice(1));
 }));
 document.getElementById("headerSearch").addEventListener("submit", e => {
  e.preventDefault();
@@ -890,6 +901,21 @@ document.getElementById("headerSearch").addEventListener("submit", e => {
  input.dispatchEvent(new Event("input"));
 
 });
+let activeCover = 0;
+function selectCover(index){
+ activeCover = (index + 3) % 3;
+ document.querySelectorAll(".cover-slide").forEach((slide, i) => {
+  slide.hidden = i !== activeCover;
+  if (i === activeCover) {const photo = slide.querySelector("img"); if (photo.dataset.src) {photo.src = photo.dataset.src; delete photo.dataset.src;}}
+ });
+ document.querySelectorAll("[data-slide]").forEach(button => {
+  if (Number(button.dataset.slide) === activeCover) button.setAttribute("aria-current", "true"); else button.removeAttribute("aria-current");
+ });
+ document.getElementById("coverCounter").textContent = `0${activeCover + 1} / 03`;
+}
+document.getElementById("coverPrev").addEventListener("click", () => selectCover(activeCover - 1));
+document.getElementById("coverNext").addEventListener("click", () => selectCover(activeCover + 1));
+document.querySelectorAll("[data-slide]").forEach(b => b.addEventListener("click", () => selectCover(Number(b.dataset.slide))));
 /* ---------------- init ---------------- */
 renderGrid();
 renderCartBadge();

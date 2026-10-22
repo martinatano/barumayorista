@@ -1,8 +1,9 @@
-# Fotos de Barú
+# Portadas mayoristas de Barú
 
-Las portadas provienen de la tienda pública https://barubsas.com.ar/ y se sirven desde el CDN de TiendaNube. No hay sincronización automática con el administrador.
+Fotos originales aportadas por la propietaria. Se conservan sin retoque; el texto, la composición adaptable y los botones son elementos HTML/CSS de la web.
 
-- Escritorio: https://acdn-us.mitiendanube.com/stores/002/130/994/themes/rio/2-slide-1790545849710-3615095559-e68ca42dee8c35d3f8ad5278c590336f1790545851-1920-1920.webp?8215736643541017156
-- Celular: https://acdn-us.mitiendanube.com/stores/002/130/994/themes/rio/2-slide-1788965442327-2659687205-c20ba0842315e6b72cbb3c87fb2895ac1788965444-1920-1920.webp?8215736643541017156
+- `assets/portadas/difusores-baru.jpeg`: IMG_4236.jpeg. Portada “Barú, en tu negocio”.
+- `assets/portadas/home-sprays-baru.png`: EE9C8CEC-F26C-43ED-A9CF-69C72AC79C8E.png. Portada “Un lugar para cada aroma”.
+- `assets/portadas/difusores-marca.jpeg`: IMG_4251.jpeg. Portada “Tus aromas. Tu marca”.
 
-Se reutilizan las portadas existentes, con sus textos originales. El contexto y las condiciones mayoristas están fuera de las imágenes. Las fotos nuevas que aporte Barú podrán reemplazarlas.
+Las tres portadas se recorren manualmente. Las fotos secundarias se cargan al abrir su portada. Los accesos llevan a la sección Productos, con la categoría correspondiente cuando aplica.
