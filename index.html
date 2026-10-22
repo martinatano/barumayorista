@@ -2,7 +2,7 @@
 <title>Barú Mayorista · Aromas para tu negocio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
 <style>
   :root{
     --paper:#EDEAE3; --surface:#FFFFFF; --surface-2:#F5F3EE;
@@ -311,16 +311,12 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-copy">
-    <p class="hero-kicker">HOME SPRAYS · DIFUSORES · VELAS</p>
-    <h1>Aromas para <br>tu local.</h1>
-    <p class="sub">Elegí los productos Barú para tu negocio.<br>También personalizamos las etiquetas de tus difusores con tu marca.</p>
-    <a class="primary-link" href="#viewTabs">Ver catálogo</a>
-    <p class="hero-small">Armá tu pedido online. Lo coordinamos por WhatsApp.</p>
-  </div>
-  <div class="hero-images"><figure class="hero-photo"><img id="heroImg" alt="Difusores Barú de vidrio" fetchpriority="high"></figure><figure class="hero-secondary"><img id="heroSpray" alt="Home Spray Petit Barú" fetchpriority="high"></figure></div>
+<section class="retail-cover" aria-label="Barú mayorista">
+  <a href="#viewTabs" aria-label="Ver catálogo mayorista de Barú">
+    <picture><source media="(max-width:760px)" srcset="https://acdn-us.mitiendanube.com/stores/002/130/994/themes/rio/2-slide-1788965442327-2659687205-c20ba0842315e6b72cbb3c87fb2895ac1788965444-1920-1920.webp?8215736643541017156"><img src="https://acdn-us.mitiendanube.com/stores/002/130/994/themes/rio/2-slide-1790545849710-3615095559-e68ca42dee8c35d3f8ad5278c590336f1790545851-1920-1920.webp?8215736643541017156" alt="Difusores Barú. Ver catálogo mayorista." fetchpriority="high" width="1280" height="469"></picture>
+  </a>
 </section>
+<section class="wholesale-intro"><h1>Barú mayorista</h1><p>Home sprays, difusores y velas para tu negocio. Armá tu pedido y coordiná con nosotros por WhatsApp.</p><a href="#viewTabs">Ver productos</a></section>
 <div class="buying-facts"><div><strong>Primera compra</strong><span>Desde $180.000</span></div><div><strong>Reposición</strong><span>Desde $150.000</span></div><div><strong>Hecho a pedido</strong><span>Hasta 7 días hábiles</span></div><div><strong>Envíos</strong><span>A todo el país</span></div></div>
 <section class="category-section" aria-labelledby="categoriesTitle"><h2 id="categoriesTitle">Nuestros productos</h2><div class="category-gallery" id="categoryGallery"></div></section>
 <div class="view-tabs" id="viewTabs">
@@ -446,8 +442,7 @@ const WHATSAPP = "5491178185624";
 
 const fmt = n => n==null ? "" : "$" + n.toLocaleString("es-AR");
 const img = sku => (window.BARU_IMAGES && window.BARU_IMAGES[sku]) || "";
-document.getElementById("heroImg").src = img("HERO");
-document.getElementById("heroSpray").src = img("HS-125");
+
 const setHdr = () => document.documentElement.style.setProperty("--hdr", document.querySelector("header.top").offsetHeight + "px");
 setHdr();
 window.addEventListener("resize", setHdr);
