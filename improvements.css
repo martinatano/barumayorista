@@ -64,3 +64,16 @@ header.top{background:#eee;color:#111;border-bottom:1px solid #ddd}
 .cover-sprays .cover-photo{object-position:50% 52%}
 .cover-brand .cover-photo{object-position:50% 69%}
 @media(max-width:760px){.cover-photo{object-position:50% 70%}.cover-slide::before,.cover-sprays::before,.cover-brand::before{background:linear-gradient(180deg,rgba(0,0,0,.46),rgba(0,0,0,.23) 35%,transparent 72%)}.cover-brand .cover-photo{object-position:50% 80%}.cover-sprays .cover-photo{object-position:50% 64%}}
+
+/* Controles suaves y firma de marca horizontal. */
+.brand{flex-direction:row;align-items:center;gap:14px;flex-shrink:0}
+.brand span{font-size:10px;letter-spacing:.16em;white-space:nowrap}
+.announcement{text-transform:uppercase}
+.add-btn,.checkout-btn,.wa-btn,.tipo-btn,.order-bar button,.cover-cta,.primary-link{border-radius:10px}
+input.search,.product-qty,.card select.aroma-pick,.purchase-type select,.filters select,.form-fields input,.form-fields textarea{border-radius:8px}
+.qty-btn{border-radius:6px}
+.order-bar{border-radius:16px}
+.add-btn,.checkout-btn,.wa-btn,.cover-cta,.primary-link{transition:background-color .18s ease,box-shadow .18s ease}
+.add-btn:hover,.checkout-btn:hover,.cover-cta:hover,.primary-link:hover{box-shadow:0 3px 10px #00000012}
+@media(max-width:760px){.brand{align-items:center;gap:11px}.brand span{font-size:8px;letter-spacing:.13em}}
+@media(prefers-reduced-motion:reduce){.add-btn,.checkout-btn,.wa-btn,.cover-cta,.primary-link{transition:none}}
