@@ -346,11 +346,8 @@
 </div>
 
 <div id="viewCatalogo"><div class="catalog-intro"><div><h1>Productos</h1><p>Precio mayorista por unidad · Pago por transferencia</p></div><div class="purchase-type"><label for="purchaseType">¿Qué pedido vas a hacer?</label><select id="purchaseType"><option value="primera">Primera compra · mínimo $180.000</option><option value="reposicion">Reposición · mínimo $150.000</option></select></div></div>
-  <div class="filters">
+  <div class="filters" hidden>
     <label class="category-select-label" for="categorySelect">Categoría<select id="categorySelect" aria-label="Categoría de productos"></select></label>
-    <div class="filter-right">
-      <input class="search" id="searchInput" type="search" placeholder="Buscar por nombre" aria-label="Buscar producto">
-    </div>
   </div>
 
   <div class="result-summary"><span id="resultCount" role="status"></span><button id="resetFilters" hidden>Ver todos los productos</button></div>
@@ -517,7 +514,7 @@ LINEAS.forEach(linea => {
  link.textContent = linea.id ? linea.label : "Todos los productos";
  link.addEventListener("click", e => {
   e.preventDefault(); activeLinea = linea.id; categorySelect.value = linea.id;
-  searchTerm = ""; document.getElementById("searchInput").value = "";
+  searchTerm = "";
   closeProductsMenu(); renderGrid(); navigateTo("productos");
   document.querySelector("#viewProductos h1").setAttribute("tabindex", "-1");
   document.querySelector("#viewProductos h1").focus({preventScroll:true});
@@ -534,15 +531,12 @@ document.querySelector(".products-nav").addEventListener("focusout", e => {if(!e
 categorySelect.addEventListener("change", () => { activeLinea = categorySelect.value; renderGrid(); });
 document.getElementById("resetFilters").addEventListener("click", () => {
  activeLinea = ""; searchTerm = ""; categorySelect.value = "";
- document.getElementById("searchInput").value = "";
+
  renderGrid();
 });
 const normalizeSearch = value => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-document.getElementById("searchInput").addEventListener("input", (e) => {
-  searchTerm = normalizeSearch(e.target.value.trim());
-  renderGrid();
-});
+
 
 document.getElementById("condToggle").addEventListener("click", () => {
   const d = document.getElementById("condDetail");
@@ -947,15 +941,14 @@ document.getElementById("barOpen").addEventListener("click", openDrawer);
 document.getElementById("purchaseType").addEventListener("change", e => { state.tipo = e.target.value; persist(); renderCartBadge(); });
 document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
  e.preventDefault();
- if (a.dataset.category) {activeLinea = a.dataset.category; categorySelect.value = activeLinea; searchTerm = ""; document.getElementById("searchInput").value = ""; renderGrid();}
+ if (a.dataset.category) {activeLinea = a.dataset.category; categorySelect.value = activeLinea; searchTerm = "";  renderGrid();}
  navigateTo(a.hash.slice(1));
 }));
 document.getElementById("headerSearch").addEventListener("submit", e => {
  e.preventDefault();
  navigateTo("productos"); document.getElementById("resetFilters").click();
- const input = document.getElementById("searchInput");
- input.value = document.getElementById("headerQuery").value;
- input.dispatchEvent(new Event("input"));
+ searchTerm = normalizeSearch(document.getElementById("headerQuery").value.trim());
+ renderGrid();
 
 });
 let activeCover = 0;
