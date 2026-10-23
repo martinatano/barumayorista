@@ -421,8 +421,9 @@ const AROMAS = [
 ];
 
 const PRODUCTS = [
-  {sku:"VELA-TENNESSEE",nombre:"Vela Tennessee",linea:"velas-aromaticas",precio_mayorista:null,nota:"Vela básica en vaso de vidrio, sin cristales. Imagen ilustrativa.",imagen:"assets/productos/vela-tennessee.png"},
-  {sku:"VELA-CONICA-400",nombre:"Vela Cónica",linea:"velas-aromaticas",tamano:"400ml",precio_mayorista:26000,precio_sugerido:43700,precio_sugerido_confirmado:true,nota:"Flor oriental · Pepino y Melón · Vainilla y Coco. Consultar disponibilidad y aroma al coordinar el pedido.",imagen:"https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-42-ec8fbfbeac406a210c17766412481922-1024-1024.webp"},
+  {sku:"VELA-PEONIA",nombre:"Vela Peonia",linea:"velas-aromaticas",precio_mayorista:null,precio_sugerido:20700,precio_sugerido_confirmado:true,nota:"Aroma Gardenia",imagen:"https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-18-5e7eb90cfd9f7dff6617766400059925-1024-1024.webp"},
+  {sku:"VELA-TENNESSEE",nombre:"Vela Tennessee",linea:"velas-aromaticas",tamano:"200ml",precio_mayorista:null,nota:"Vela básica en vaso de vidrio, sin cristales. Imagen ilustrativa.",imagen:"assets/productos/vela-tennessee.png"},
+  {sku:"VELA-CONICA-400",nombre:"Vela Cónica",linea:"velas-aromaticas",tamano:"400ml",precio_mayorista:26000,precio_sugerido:43700,precio_sugerido_confirmado:true,aromas:["Flor Oriental","Pepino y Melón","Vainilla y Coco"],nota:"Consultar disponibilidad al coordinar el pedido.",imagen:"https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-42-ec8fbfbeac406a210c17766412481922-1024-1024.webp"},
   {"sku": "VELA-MOLDE-FLOWER", "nombre": "Vela Flower", "linea": "velas-molde", "precio_mayorista": 6500, "precio_sugerido": 12700, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-20-ccb1f83b1ed599ee8a17766401079345-640-0.webp"},
   {"sku": "VELA-MOLDE-BUBBLE-CUBO", "nombre": "Vela Bubble cubo", "linea": "velas-molde", "precio_mayorista": 9000, "precio_sugerido": 17300, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-24-f2466e24cad251cdce17766402676195-640-0.webp"},
   {"sku": "VELA-MOLDE-BUBBLE", "nombre": "Vela Bubble", "linea": "velas-molde", "precio_mayorista": 6000, "precio_sugerido": 11500, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-37-a0f29fd45f343fbbdf17766409165654-640-0.webp"},
@@ -527,7 +528,8 @@ function productCard(p){
     return card;
   }
 
-  const hasAroma = p.aromas === "todos";
+  const aromasProducto = p.aromas === "todos" ? AROMAS : (Array.isArray(p.aromas) ? p.aromas.map(nombre => ({nombre})) : []);
+  const hasAroma = aromasProducto.length > 0;
 
   const card = document.createElement("div");
   card.className = "card";
@@ -548,7 +550,7 @@ function productCard(p){
         ${p.precio_sugerido ? `<span class="price-sug">Venta sugerida: ${aprox}${fmt(p.precio_sugerido)}</span>` : ""}
       </div>
       ${p.nota ? `<div class="nota-mini">${p.nota}</div>` : ""}
-      ${hasAroma ? `<select class="aroma-pick" data-sku="${p.sku}" aria-label="Aroma de ${p.nombre}">${AROMAS.map(a=>`<option value="${a.nombre}" ${a.nombre === productDrafts.get(p.sku)?.aroma ? "selected" : ""}>${a.nombre}</option>`).join("")}</select>` : ""}
+      ${hasAroma ? `<select class="aroma-pick" data-sku="${p.sku}" aria-label="Aroma de ${p.nombre}">${aromasProducto.map(a=>`<option value="${a.nombre}" ${a.nombre === productDrafts.get(p.sku)?.aroma ? "selected" : ""}>${a.nombre}</option>`).join("")}</select>` : ""}
       <div class="add-row">
         <input class="product-qty" type="number" min="1" max="999" value="1" inputmode="numeric" aria-label="Cantidad de ${p.nombre}"><button class="add-btn" data-sku="${p.sku}">Agregar al pedido</button>
       </div>
