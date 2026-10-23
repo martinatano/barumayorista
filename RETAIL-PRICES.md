@@ -9,7 +9,7 @@ Consulta a TiendaNube: 22/10/2026. Precios de lista ARS, sin descuentos de trans
 - DIF-AMBAR-100: $20,700. Fuente: http://barubsas.com.ar/productos/difusor-ambar-bamboo.
 - DIF-BRUMA-125: $19,600. Fuente: http://barubsas.com.ar/productos/difusor-bruma-cerezo-en-flor.
 - DIF-SERENE-250: $28,800. Fuente: http://barubsas.com.ar/productos/difusor-serene-210cc-g6qp5.
-- DIF-NORDICO-100: $21,900. Fuente: http://barubsas.com.ar/productos/difusor-nordico-100cc-1d5i4.
+- DIF-NORDICO-100: $23,500. Fuente: http://barubsas.com.ar/productos/difusor-nordico-100cc-1d5i4.
 - DIF-LABRADO-400: $55,200. Fuente: http://barubsas.com.ar/productos/difusor-labrado-400cc-16zwy.
 - DIF-REFILL-1000: $61,000. Fuente: http://barubsas.com.ar/productos/refill-difusor.
 - DIF-AUTO-30: $5,800. Fuente: http://barubsas.com.ar/productos/difusor-para-auto-gardenia.
