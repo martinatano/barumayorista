@@ -421,6 +421,12 @@ const AROMAS = [
 ];
 
 const PRODUCTS = [
+  {"sku": "VELA-MOLDE-FLOWER", "nombre": "Vela Flower", "linea": "velas-molde", "precio_mayorista": 6500, "precio_sugerido": 12700, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-20-ccb1f83b1ed599ee8a17766401079345-640-0.webp"},
+  {"sku": "VELA-MOLDE-BUBBLE-CUBO", "nombre": "Vela Bubble cubo", "linea": "velas-molde", "precio_mayorista": 9000, "precio_sugerido": 17300, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-24-f2466e24cad251cdce17766402676195-640-0.webp"},
+  {"sku": "VELA-MOLDE-BUBBLE", "nombre": "Vela Bubble", "linea": "velas-molde", "precio_mayorista": 6000, "precio_sugerido": 11500, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-37-a0f29fd45f343fbbdf17766409165654-640-0.webp"},
+  {"sku": "VELA-MOLDE-BOUQUET", "nombre": "Vela Bouquet", "linea": "velas-molde", "precio_mayorista": 8000, "precio_sugerido": 15000, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-28-33826391635b84cf6717766405741685-640-0.webp"},
+  {"sku": "VELA-MOLDE-TEDDY", "nombre": "Vela Teddy", "linea": "velas-molde", "precio_mayorista": 9500, "precio_sugerido": 17300, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/img_2962-e104148f0716e2c18917813151902570-640-0.webp"},
+
   {sku:"HS-400",nombre:"Home Spray",linea:"home-spray",tamano:"400ml",precio_mayorista:12000,precio_sugerido:22000,precio_sugerido_confirmado:true,aromas:"todos",personalizable_etiqueta:true},
   {sku:"HS-125",nombre:"Home Spray Petit",linea:"home-spray",tamano:"125ml",precio_mayorista:5000,precio_sugerido:9000,precio_sugerido_confirmado:true,aromas:"todos",personalizable_etiqueta:true},
   {sku:"HS-REFILL-1000",nombre:"Refill Home Spray",linea:"home-spray",tamano:"1000ml",precio_mayorista:30000,precio_sugerido:null,aromas:"todos",nota:"Viene solo el bidón, sin el frasco de home spray"},
@@ -446,14 +452,15 @@ const LINEAS = [
   {id:"difusor-hogar", label:"Difusores"},
   {id:"difusor-auto", label:"Para el auto"},
   {id:"accesorios", label:"Accesorios"},
-  {id:"velas", label:"Velas"}
+  {id:"velas", label:"Velas de cristales"},
+  {id:"velas-molde", label:"Velas de molde"}
 ];
 
 const CONDICIONES = { minimo_primera_compra:180000, minimo_reposicion:150000 };
 const WHATSAPP = "5491178185624";
 
 const fmt = n => n==null ? "" : "$" + n.toLocaleString("es-AR");
-const img = sku => (window.BARU_IMAGES && window.BARU_IMAGES[sku]) || "";
+const img = sku => PRODUCTS.find(p => p.sku === sku)?.imagen || (window.BARU_IMAGES && window.BARU_IMAGES[sku]) || "";
 
 const setHdr = () => document.documentElement.style.setProperty("--hdr", document.querySelector("header.top").offsetHeight + "px");
 setHdr();
