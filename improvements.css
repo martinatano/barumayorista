@@ -79,3 +79,14 @@ input.search,.product-qty,.card select.aroma-pick,.purchase-type select,.filters
 @media(prefers-reduced-motion:reduce){.add-btn,.checkout-btn,.wa-btn,.cover-cta,.primary-link{transition:none}}
 
 .inquiry-btn{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;margin-top:8px}
+
+/* Categorías desde la navegación principal. */
+.products-nav{position:relative;display:flex;align-items:center}
+.products-toggle{display:flex;align-items:center;gap:7px;padding:0;background:none;border:0;color:#111;font:inherit;font-size:13px;white-space:nowrap;min-height:44px}
+.products-toggle.active{text-decoration:underline;text-underline-offset:5px}
+.products-menu{position:absolute;top:calc(100% + 8px);left:-16px;width:238px;padding:8px;background:#fff;border:1px solid #ddd;border-radius:12px;box-shadow:0 10px 30px #00000014;z-index:100}
+.products-menu[hidden]{display:none}
+.store-nav .products-menu a{display:block;color:#111;padding:11px 12px;border-radius:7px;font-size:13px;text-decoration:none}
+.store-nav .products-menu a:hover,.store-nav .products-menu a:focus-visible{background:#f1f1f1}
+.category-select-label{display:none!important}
+@media(max-width:760px){.products-toggle{font-size:11px;min-height:36px}.products-menu{top:100%;left:-45px;width:220px}.store-nav .products-menu a{font-size:13px;padding:12px}}
