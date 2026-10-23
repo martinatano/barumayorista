@@ -77,3 +77,5 @@ input.search,.product-qty,.card select.aroma-pick,.purchase-type select,.filters
 .add-btn:hover,.checkout-btn:hover,.cover-cta:hover,.primary-link:hover{box-shadow:0 3px 10px #00000012}
 @media(max-width:760px){.brand{align-items:center;gap:11px}.brand span{font-size:8px;letter-spacing:.13em}}
 @media(prefers-reduced-motion:reduce){.add-btn,.checkout-btn,.wa-btn,.cover-cta,.primary-link{transition:none}}
+
+.inquiry-btn{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;margin-top:8px}

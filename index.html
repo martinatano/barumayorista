@@ -298,7 +298,7 @@
     .view-tabs{gap:22px}
   }
 </style>
-<link rel="stylesheet" href="improvements.css?v=20261022-soft">
+<link rel="stylesheet" href="improvements.css?v=20261022-conica">
 
 <div class="announcement" aria-label="Venta mayorista. Envíos a todo el país. Primera compra desde $180.000"><div class="announcement-track" aria-hidden="true"><div class="announcement-group"><span>VENTA MAYORISTA <span>·</span> Envíos a todo el país <span>·</span> Primera compra desde $180.000</span><span>VENTA MAYORISTA <span>·</span> Envíos a todo el país <span>·</span> Primera compra desde $180.000</span></div><div class="announcement-group"><span>VENTA MAYORISTA <span>·</span> Envíos a todo el país <span>·</span> Primera compra desde $180.000</span><span>VENTA MAYORISTA <span>·</span> Envíos a todo el país <span>·</span> Primera compra desde $180.000</span></div></div></div>
 <header class="top">
@@ -421,6 +421,7 @@ const AROMAS = [
 ];
 
 const PRODUCTS = [
+  {sku:"VELA-CONICA-400",nombre:"Vela Cónica",linea:"velas-aromaticas",tamano:"400ml",precio_mayorista:null,precio_sugerido:43700,precio_sugerido_confirmado:true,nota:"Flor oriental · Pepino y Melón · Vainilla y Coco",imagen:"https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-42-ec8fbfbeac406a210c17766412481922-1024-1024.webp"},
   {"sku": "VELA-MOLDE-FLOWER", "nombre": "Vela Flower", "linea": "velas-molde", "precio_mayorista": 6500, "precio_sugerido": 12700, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-20-ccb1f83b1ed599ee8a17766401079345-640-0.webp"},
   {"sku": "VELA-MOLDE-BUBBLE-CUBO", "nombre": "Vela Bubble cubo", "linea": "velas-molde", "precio_mayorista": 9000, "precio_sugerido": 17300, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-24-f2466e24cad251cdce17766402676195-640-0.webp"},
   {"sku": "VELA-MOLDE-BUBBLE", "nombre": "Vela Bubble", "linea": "velas-molde", "precio_mayorista": 6000, "precio_sugerido": 11500, "precio_sugerido_confirmado": true, "imagen": "https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-37-a0f29fd45f343fbbdf17766409165654-640-0.webp"},
@@ -454,7 +455,8 @@ const LINEAS = [
   {id:"difusor-auto", label:"Para el auto"},
   {id:"accesorios", label:"Accesorios"},
   {id:"velas", label:"Velas de cristales"},
-  {id:"velas-molde", label:"Velas de molde"}
+  {id:"velas-molde", label:"Velas de molde"},
+  {id:"velas-aromaticas", label:"Velas aromáticas"}
 ];
 
 const CONDICIONES = { minimo_primera_compra:180000, minimo_reposicion:150000 };
@@ -475,7 +477,7 @@ try {
   if (saved && Array.isArray(saved.cart)) state = saved;
 } catch(e) {}
 
-state.cart = state.cart.filter(l => l && PRODUCTS.some(p => p.sku === l.sku) && Number.isInteger(l.cantidad) && l.cantidad > 0 && (l.aroma == null || AROMAS.some(a => a.nombre === l.aroma)));
+state.cart = state.cart.filter(l => l && PRODUCTS.some(p => p.sku === l.sku && p.precio_mayorista > 0) && Number.isInteger(l.cantidad) && l.cantidad > 0 && (l.aroma == null || AROMAS.some(a => a.nombre === l.aroma)));
 if (!["primera", "reposicion"].includes(state.tipo)) state.tipo = "primera";
 let customerDraft = {};
 let checkoutOpen = false;
@@ -516,6 +518,14 @@ document.getElementById("condToggle").addEventListener("click", () => {
 
 /* ---------------- product grid ---------------- */
 function productCard(p){
+  if (p.precio_mayorista == null) {
+    const card = document.createElement("div");
+    card.className = "card";
+    const consulta = encodeURIComponent(`Hola, quiero consultar el precio mayorista y la disponibilidad de ${p.nombre} ${p.tamano || ""}.`);
+    card.innerHTML = `<div class="ph"><img src="${img(p.sku)}" alt="${p.nombre}" loading="lazy"></div><div class="body"><h3>${p.nombre}</h3><div class="tam">${p.tamano || ""}</div><div class="nota-mini">${p.nota || ""}</div><a class="add-btn inquiry-btn" href="https://wa.me/${WHATSAPP}?text=${consulta}" target="_blank" rel="noopener">Consultar precio y disponibilidad</a></div>`;
+    return card;
+  }
+
   const hasAroma = p.aromas === "todos";
 
   const card = document.createElement("div");
@@ -601,6 +611,7 @@ function renderGrid(){
 
 /* ---------------- cart logic ---------------- */
 function addToCart(sku, aroma, cantidad = 1){
+  if (!PRODUCTS.some(p => p.sku === sku && p.precio_mayorista > 0)) return;
   const existing = state.cart.find(l => l.sku === sku && l.aroma === aroma);
   if (existing) existing.cantidad += cantidad;
   else state.cart.push({ sku, aroma, cantidad });
