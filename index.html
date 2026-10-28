@@ -428,6 +428,7 @@ const AROMAS = [
 ];
 
 const PRODUCTS = [
+  {sku:"DIF-SILVER-100",nombre:"Difusor Silver",linea:"difusor-hogar",tamano:"100ml",precio_mayorista:null,precio_sugerido:21500,precio_sugerido_confirmado:true,aromas:"todos",nota:"Envase de vidrio. Incluye 5 varillas de ratán negras.",imagen:"https://acdn-us.mitiendanube.com/stores/002/130/994/products/40f49a06-3b11-4579-984a-b01a89f8c241-6521b6dde6829d322717928819850330-1024-1024.webp"},
   {sku:"VELA-PEONIA",nombre:"Vela Peonia",linea:"velas-aromaticas",precio_mayorista:11000,precio_sugerido:20700,precio_sugerido_confirmado:true,aromas:"todos",imagen:"https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-18-5e7eb90cfd9f7dff6617766400059925-1024-1024.webp"},
   {sku:"VELA-TENNESSEE",nombre:"Vela Tennessee",linea:"velas-aromaticas",tamano:"200ml",precio_mayorista:10000,precio_sugerido:18000,precio_sugerido_confirmado:false,aromas:"todos",nota:"Vela básica en vaso de vidrio, sin cristales. Imagen ilustrativa.",imagen:"assets/productos/vela-tennessee.png"},
   {sku:"VELA-CONICA-400",nombre:"Vela Cónica",linea:"velas-aromaticas",tamano:"400ml",precio_mayorista:26000,precio_sugerido:43700,precio_sugerido_confirmado:true,aromas:"todos",nota:"Consultar disponibilidad al coordinar el pedido.",imagen:"https://acdn-us.mitiendanube.com/stores/002/130/994/products/pomelli_photoshoot_image_9_16_0419-42-ec8fbfbeac406a210c17766412481922-1024-1024.webp"},
@@ -552,6 +553,24 @@ function productCard(p){
     card.className = "card";
     const consulta = encodeURIComponent(`Hola, quiero consultar el precio mayorista y la disponibilidad de ${p.nombre} ${p.tamano || ""}.`);
     card.innerHTML = `<div class="ph"><img src="${img(p.sku)}" alt="${p.nombre}" loading="lazy"></div><div class="body"><h3>${p.nombre}</h3><div class="tam">${p.tamano || ""}</div><div class="nota-mini">${p.nota || ""}</div><a class="add-btn inquiry-btn" href="https://wa.me/${WHATSAPP}?text=${consulta}" target="_blank" rel="noopener">Consultar precio y disponibilidad</a></div>`;
+    if (p.precio_sugerido) {
+      const reference = document.createElement("span");
+      reference.className = "price-sug";
+      reference.textContent = `Venta sugerida: ${fmt(p.precio_sugerido)}`;
+      card.querySelector(".body").insertBefore(reference, card.querySelector(".nota-mini"));
+    }
+    if (p.aromas === "todos" || Array.isArray(p.aromas)) {
+      const select = document.createElement("select");
+      select.className = "aroma-pick";
+      select.setAttribute("aria-label", `Aroma de ${p.nombre}`);
+      const choices = p.aromas === "todos" ? AROMAS.map(a => a.nombre) : p.aromas;
+      choices.forEach(name => { const option = document.createElement("option"); option.value = name; option.textContent = name; select.appendChild(option); });
+      const link = card.querySelector(".inquiry-btn");
+      const updateInquiry = () => {link.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hola, quiero consultar el precio mayorista y la disponibilidad de ${p.nombre} ${p.tamano || ""}, aroma ${select.value}.`)}`;};
+      select.addEventListener("change", updateInquiry);
+      card.querySelector(".body").insertBefore(select, link);
+      updateInquiry();
+    }
     return card;
   }
 
