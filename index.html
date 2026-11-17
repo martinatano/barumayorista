@@ -415,6 +415,7 @@
 document.getElementById("brandLogo").src = window.BARU_LOGO || "";
 
 const AROMAS = [
+  {"nombre":"Santal Wood","perfil":"","descripcion":""},
   {"nombre":"Gardenia","perfil":"Floral frutal","descripcion":"Salida fresca con manzana y muguet. Corazón de gardenia, jazmín y tuberosa. Fondo de almizcle suave y envolvente."},
   {"nombre":"Flor Oriental","perfil":"Dulce floral","descripcion":"Notas frutales de pera y manzana. Corazón de jazmín, azahar e iris. Fondo de vainilla, tonka, praliné y pachulí."},
   {"nombre":"Cerezo en Flor","perfil":"Frutal floral dulce","descripcion":"Salida vibrante con manzana, fresa y durazno. Bouquet de rosa, jazmín e iris. Fondo cálido de almizcle, vainilla y maderas."},
@@ -949,9 +950,9 @@ function renderAromas(){
   const wrap = document.getElementById("aromasList");
   wrap.innerHTML = AROMAS.map(a => `
     <div class="aroma-card">
-      <span class="perfil">${a.perfil}</span>
+      ${a.perfil ? `<span class="perfil">${a.perfil}</span>` : ""}
       <h3>${a.nombre}</h3>
-      <p>${a.descripcion}</p>
+      ${a.descripcion ? `<p>${a.descripcion}</p>` : ""}
     </div>
   `).join("");
 }
