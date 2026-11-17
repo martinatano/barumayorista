@@ -107,3 +107,15 @@ input.search,.product-qty,.card select.aroma-pick,.purchase-type select,.filters
 .store-nav>a,.products-toggle{display:inline-flex;align-items:center;min-height:44px;line-height:1.4;padding:0}
 .products-nav{align-self:center}
 @media(max-width:760px){.store-nav>a,.products-toggle{min-height:40px;padding:10px 0}}
+
+/* Guía de aromas con la misma identidad del catálogo. */
+#viewAromas .intro{max-width:1360px;margin:auto;padding:40px 40px 24px}
+#viewAromas h1{font:500 30px "Plus Jakarta Sans",sans-serif}
+#viewAromas .intro p{font-size:14px;color:var(--muted);margin-top:12px;line-height:1.7}
+#aromasList{max-width:1360px;margin:auto;padding:0 40px 56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+#aromasList .aroma-card{padding:24px 0;border:0;border-top:1px solid var(--line-strong);background:transparent;display:flex;flex-direction:column;gap:12px}
+#aromasList .aroma-card h3{font:500 20px "Plus Jakarta Sans",sans-serif;order:-1}
+#aromasList .perfil{font-size:11px;color:var(--muted);letter-spacing:.02em}
+#aromasList .aroma-card p{font-size:13px;line-height:1.85}
+@media(max-width:1000px){#aromasList{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.store-nav{gap:8px;flex-wrap:wrap}#viewAromas .intro{padding:28px 20px 20px}#aromasList{padding:0 20px 36px;grid-template-columns:1fr;gap:4px}}
