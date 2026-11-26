@@ -2,7 +2,10 @@
  * Barú Mayorista · registro de pedidos y clientes en Google Sheets.
  * Pegar en Extensiones > Apps Script de una planilla nueva. Ver README.md.
  */
-const TOKEN = 'CAMBIAR-ESTE-TOKEN'; // el mismo valor que ORDERS_TOKEN en index.html
+const TOKEN = 'M4RT1N4MUN1Z270'; // el mismo valor que ORDERS_TOKEN en index.html
+// Solo si el script NO se creó desde la planilla (Extensiones > Apps Script): pegá acá el ID de la
+// planilla, que es el texto largo de su URL entre /d/ y /edit. Si lo hiciste desde la planilla, dejalo vacío.
+const SHEET_ID = '';
 
 const PEDIDOS = 'Pedidos';
 const CLIENTES = 'Clientes';
@@ -60,7 +63,7 @@ function doPost(e) {
 }
 
 function sheet_(name, headers) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
   let sh = ss.getSheetByName(name);
   if (!sh) {
     sh = ss.insertSheet(name);
@@ -86,4 +89,16 @@ function safe_(v) {
 
 function out_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Para probar desde el editor: elegí "probar" en el desplegable y tocá Ejecutar.
+// Si anda, crea las pestañas y una fila de prueba (después la borrás). Si falla, el error se ve en el registro.
+function probar() {
+  const r = doPost({ postData: { contents: JSON.stringify({
+    token: TOKEN, codigo: 'TEST-' + Date.now(), fecha: new Date().toISOString(),
+    nombre: 'Prueba', negocio: 'Local de prueba', telefono: '11 2345-6789', telefonoClave: '1123456789',
+    localidad: 'Test', tipo: 'primera', notas: '', total: 1,
+    items: [{ nombre: 'Producto de prueba', aroma: '', cantidad: 1, subtotal: 1 }]
+  }) } });
+  Logger.log(r.getContent());
 }
