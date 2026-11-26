@@ -578,6 +578,12 @@ const LINEAS = [
 
 const CONDICIONES = { minimo_primera_compra:180000, minimo_reposicion:150000 };
 const WHATSAPP = "5491178185624";
+// Registro de pedidos y clientes (Google Sheets vía Apps Script). Ver apps-script/README.md.
+// Si ORDERS_ENDPOINT está vacío, la web funciona igual que antes (solo WhatsApp).
+const ORDERS_ENDPOINT = "";
+const ORDERS_TOKEN = "CAMBIAR-ESTE-TOKEN";
+const CLIENTE_KEY = "baru_cliente_v1";
+const PENDING_KEY = "baru_pending_v1";
 
 const fmt = n => n==null ? "" : "$" + n.toLocaleString("es-AR");
 const img = sku => PRODUCTS.find(p => p.sku === sku)?.imagen || (window.BARU_IMAGES && window.BARU_IMAGES[sku]) || "";
@@ -597,6 +603,10 @@ try {
 state.cart = state.cart.filter(l => l && PRODUCTS.some(p => p.sku === l.sku && p.precio_mayorista > 0) && Number.isInteger(l.cantidad) && l.cantidad > 0 && (l.aroma == null || AROMAS.some(a => a.nombre === l.aroma)));
 if (!["primera", "reposicion"].includes(state.tipo)) state.tipo = "primera";
 let customerDraft = {};
+try {
+  const c = JSON.parse(localStorage.getItem(CLIENTE_KEY) || "null");
+  if (c) customerDraft = { fNombre:c.nombre||"", fNegocio:c.negocio||"", fTelefono:c.telefono||"", fLocalidad:c.localidad||"" };
+} catch(e) {}
 let checkoutOpen = false;
 let activeLinea = "";
 const productDrafts = new Map();
@@ -902,6 +912,10 @@ function renderDrawer(){
         <input type="text" id="fNombre" autocomplete="name" placeholder="Tu nombre">
       </div>
       <div>
+        <label for="fTelefono">WhatsApp de contacto</label>
+        <input type="tel" id="fTelefono" autocomplete="tel" inputmode="tel" placeholder="Ej: 11 2345-6789">
+      </div>
+      <div>
         <label for="fNegocio">Nombre del local (opcional)</label>
         <input type="text" id="fNegocio" placeholder="Ej: Deco Norte">
       </div>
@@ -949,11 +963,16 @@ function sendOrder(){
   const nombre = document.getElementById("fNombre").value.trim();
   const negocio = document.getElementById("fNegocio").value.trim();
   const localidad = document.getElementById("fLocalidad").value.trim();
+  const telefono = document.getElementById("fTelefono").value.trim();
   const notas = document.getElementById("fNotas").value.trim();
   const err = document.getElementById("fErr");
 
   if (!nombre || !localidad){
     err.textContent = "Completá tu nombre y localidad para seguir.";
+    return;
+  }
+  if (telefonoClave(telefono).length < 10){
+    err.textContent = "Ingresá tu WhatsApp con código de área (ej: 11 2345-6789).";
     return;
   }
   err.textContent = "";
@@ -999,7 +1018,7 @@ function sendOrder(){
 
   let msg = `PEDIDO MAYORISTA ${code}\n`;
   msg += [negocio, nombre].filter(Boolean).join(" · ") + "\n";
-  msg += `${localidad} · ${tipoLabel}\n\n`;
+  msg += `${telefono} · ${localidad} · ${tipoLabel}\n\n`;
   msg += detail + "\n\n";
   if (condensed) msg += `(${state.cart.length} líneas agrupadas por producto)\n\n`;
   msg += `Total: ${fmt(total)}\n`;
@@ -1008,8 +1027,49 @@ function sendOrder(){
 
   const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank", "noopener");
+  try { localStorage.setItem(CLIENTE_KEY, JSON.stringify({ nombre, negocio, telefono, localidad })); } catch(e) {}
+  registrarPedido({
+    token: ORDERS_TOKEN, codigo: code, fecha: new Date().toISOString(),
+    nombre, negocio, telefono, telefonoClave: telefonoClave(telefono), localidad, tipo: state.tipo, notas, total,
+    items: state.cart.map(l => {
+      const p = PRODUCTS.find(pp => pp.sku === l.sku);
+      return { sku: l.sku, nombre: p.nombre, aroma: l.aroma || "", cantidad: l.cantidad, precio: p.precio_mayorista, subtotal: p.precio_mayorista * l.cantidad };
+    })
+  });
   showToast("Tu pedido sigue guardado. Confirmalo en WhatsApp.");
 }
+
+/* ---------------- registro de pedidos (Google Sheets) ---------------- */
+// Clave para reconocer al cliente: últimos 10 dígitos del teléfono (ignora 0, 15, +54, 9).
+function telefonoClave(t){ return String(t || "").replace(/\D/g, "").slice(-10); }
+
+function loadPending(){ try { return JSON.parse(localStorage.getItem(PENDING_KEY) || "[]"); } catch(e) { return []; } }
+function savePending(a){ try { localStorage.setItem(PENDING_KEY, JSON.stringify(a)); } catch(e) {} }
+
+function registrarPedido(payload){
+  if (!ORDERS_ENDPOINT) return;
+  const q = loadPending();
+  if (!q.some(x => x.codigo === payload.codigo)) q.push(payload);
+  savePending(q);
+  flushPending();
+}
+
+let flushing = false;
+async function flushPending(){
+  if (!ORDERS_ENDPOINT || flushing) return;
+  flushing = true;
+  try {
+    for (const p of loadPending()){
+      try {
+        // text/plain evita el preflight CORS; el script deduplica por código si se reintenta.
+        await fetch(ORDERS_ENDPOINT, { method:"POST", headers:{ "Content-Type":"text/plain;charset=utf-8" }, body: JSON.stringify(p), keepalive:true });
+        savePending(loadPending().filter(x => x.codigo !== p.codigo));
+      } catch(e) { break; }
+    }
+  } finally { flushing = false; }
+}
+window.addEventListener("online", flushPending);
+flushPending();
 
 /* ---------------- toast ---------------- */
 let toastTimer;
